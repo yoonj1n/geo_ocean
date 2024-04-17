@@ -1,0 +1,296 @@
+.App {
+    font-size: 62.5%;
+}
+
+/* font */
+@font-face {
+    font-family: "Basic";
+    src: url(./fonts/NanumSquareR.ttf);
+}
+
+@font-face {
+    font-family: "BasicB";
+    src: url(./fonts/NanumSquareB.ttf);
+}
+
+@font-face {
+    font-family: "BasicEB";
+    src: url(./fonts/NanumSquareEB.ttf);
+}
+
+/* under page css */
+.under-right{
+    width: 100%;
+    height: calc(100vh - 3rem);
+    font-family: "Basic";
+    display: flex;
+    background-color: #d3dff7;
+}
+.Nav-bar{
+    background-color: #212121;
+}
+.logo{
+    margin-top: 0.5rem;
+    width: 10.5rem;
+}
+
+/* map css */
+.Mapcontainers{
+    height: 100%;
+    width: 100%;
+}
+
+/* Controller Layer css */
+.Controller{
+    position:absolute !important;
+    top:1rem;
+    left: 1rem !important;
+    z-index: 1000;
+    /* height: 20rem; */
+    width: 20rem;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-top-right-radius: 8px !important;
+    border-top-left-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+}
+
+.Controller_D{
+    display: flex;
+    flex-direction: column;
+}
+
+.ControllerT{
+    font-family: "BasicEB" !important;
+    font-size: 0.9rem !important;
+}
+
+.ControllerD input{
+    font-family: "BasicB" !important;
+    font-size: 0.8rem !important;
+}
+
+.ControllerD .MuiInputBase-root{
+    height: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.ControllerSWrapper{
+    margin-bottom: 0.5rem !important;
+}
+
+.ControllerS{
+    font-family: "BasicB" !important;
+    font-size: 0.8rem !important;
+    max-height: 2rem;
+}
+
+.ControllerR{
+    font-family: "BasicB" !important;
+    font-size: 0.8rem !important;
+    max-height: 3rem;
+    padding: 0.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.ControllerR label{
+    height: 2rem;
+}
+
+.ControllerR span{
+    font-family: "BasicB" !important;
+    font-size: 0.8rem !important;
+
+}
+
+.ControllerL_M{
+    font-family: "Basic" !important;
+    font-size: 0.8rem !important;
+}
+
+.ControllerHeader{
+    margin-left:0.3rem;
+    margin-bottom: 0.2rem;
+}
+
+.MuiPopover-paper{
+    max-height: 10rem !important;
+}
+
+.Colorbar{
+    /* position:absolute !important; */
+    z-index: 1000;
+    width: 18rem;
+    height:4.3rem;
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: rgba(255, 255, 255,0) !important;
+    box-shadow: 0px 0px !important;
+    align-items: center;
+    padding: 0rem 0rem 2rem 0rem;
+}
+
+.Colorbar_ssc{
+    /* position:absolute !important; */
+    z-index: 1000;
+    width: 18rem;
+    height:4.3rem;
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: rgba(255, 255, 255,0) !important;
+    box-shadow: 0px 0px !important;
+    align-items: center;
+    padding: 0rem 0rem 2rem 0rem;
+}
+
+.Colorbarimg{
+    width: 18rem;
+    height: 1rem;
+    margin-bottom: 0.3rem;
+    z-index: 1000;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+}
+
+.Colorbarimg_ssc{
+    width: 18rem;
+    height: 1rem;
+    margin-bottom: 0.3rem;
+    z-index: 1000;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+}
+
+.colorbar_num{
+    z-index: 1000;
+    height: 1rem;
+    width: 18rem;
+    justify-content: space-between;
+    font-family: "BasicB" !important;
+    font-size: 0.8rem !important;
+    color: #000000;
+    display: flex;
+}
+
+.colorbar_num p{
+    margin: 0rem;
+}
+
+.marker{
+    white-space: nowrap;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    align-content: center !important;
+}
+
+.marker img{
+    height:2rem;
+}
+
+.marker_label{
+    width:auto;
+    z-index: 1000;
+    font-family: "BasicB" !important;
+    font-size: 1.2rem !important;
+    color: #ffffff;
+    margin: 0rem;
+    text-shadow: 
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; 
+}
+
+
+/* Remove default zoom */
+
+.leaflet-left .leaflet-control-zoom{
+    display: none !important;
+}
+
+/* Popup Layer */
+.ResultPopup{
+    position:absolute !important;
+    top:1rem;
+    right: 3rem !important;
+    font-family: "BasicB" !important;
+    font-size: 0.8rem !important;
+    color: #000000;
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    z-index: 1000;
+    width: 30rem;
+    /* height: 20rem; */
+    max-height: 20rem;
+    /* scroll */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5rem !important;
+}
+
+.TSPopup{
+    position:absolute !important;
+    bottom:1rem;
+    right: 3rem !important;
+    font-family: "BasicB" !important;
+    font-size: 0.8rem !important;
+    color: #000000;
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    z-index: 1000;
+    width: 50rem;
+    height: 33rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5rem !important;
+}
+
+.PopupHeaders{
+    display: flex;
+    padding: 1rem;
+    padding-right: 0rem;
+}
+
+.PopupHeader{
+    font-family: "BasicEB" !important;
+    color: #ffffff;
+    font-size:1.2rem;
+    flex:1;
+    padding-right: 0rem !important;
+}
+
+.PopupContents{
+    flex:1;
+}
+
+.PopupT{
+    font-family: "BasicEB" !important;
+    font-size: 1.2rem !important;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.PopupCloseBtn{
+    color: #ffffff !important;
+    font-family: "BasicB" !important;
+    font-weight: bold !important;
+    padding: 0rem !important;
+}
+
+/* Table */
+
+.result-table *{
+    color: #ffffff !important;
+    font-family: "BasicB" !important;
+    font-weight: bold !important;
+}
+
+/* TEST */
+
+.ALY{
+    z-index: 999 !important;
+}
+
+.RLY{
+    z-index: 900 !important;
+}

@@ -1,0 +1,69 @@
+{
+  "name": "geo-modelweb",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.5",
+    "@mui/x-date-pickers": "^6.16.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "apexcharts": "^3.44.0",
+    "dayjs": "^1.11.10",
+    "express": "^4.18.2",
+    "forever": "^4.0.3",
+    "highcharts-react-official": "^3.2.1",
+    "http-proxy-middleware": "^2.0.6",
+    "leaflet": "^1.9.4",
+    "leaflet-geotiff-2": "https://github.com/yoonj1n/leaflet-geotiff-geomodelweb.git",
+    "leaflet-timedimension": "^1.1.1",
+    "nodemon": "^3.1.0",
+    "react": "^18.2.0",
+    "react-apexcharts": "^1.4.1",
+    "react-dom": "^18.2.0",
+    "react-leaflet": "^4.2.1",
+    "react-router-dom": "^6.12.1",
+    "react-scripts": "5.0.1",
+    "tailwindcss": "^3.3.2",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "yarn forever_client && yarn forever_server",
+    "devc": "export PORT=8002 && react-scripts start",
+    "devs": "yarn nodemon server/server.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "forever_client": "yarn forever -a -l /Volumes/GSRB02/Geo_Ocean/log/client.log -m=10000 --minUpTime=1000 --spinSleepTime=1000 start -c \"yarn client\" ./",
+    "forever_server": "yarn forever -a -l /Volumes/GSRB02/Geo_Ocean/log/server.log -m=10000 --minUpTime=1000 --spinSleepTime=1000 start server/server.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "geo-model web dev",
+  "main": "index.js",
+  "repository": "https://github.com/yoonj1n/geo-modelweb.git",
+  "author": "yoonj1n <yoonj1n_@naver.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  }
+}
