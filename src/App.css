@@ -54,6 +54,16 @@
     border-bottom-right-radius: 8px !important;
     border-bottom-left-radius: 8px !important;
 }
+.Controller2{
+    position:absolute !important;
+    top:4rem;
+    left: 1rem !important;
+    z-index: 1000;
+    /* height: 20rem; */
+}
+.Controller2 .MuiPaper-root{
+    background-color: rgba(0, 0, 0, 0.504) !important;
+}
 
 .Controller_D{
     display: flex;

@@ -5,7 +5,7 @@ import "leaflet-geotiff-2/dist/leaflet-geotiff-plotty"; // requires plotty
 import L from "leaflet";
 import { useMap, TileLayer } from "react-leaflet";
 import { useEffect, useRef, useState } from "react";
-import { Accordion, AccordionSummary, AccordionDetails, Typography, InputLabel, MenuItem, Select, FormControl,FormControlLabel,Switch, Paper, Radio, RadioGroup, Button, Table, TableBody, TableContainer, TableCell,TableHead,TableRow } from '@mui/material';
+import { Accordion, AccordionSummary, AccordionDetails, Typography, InputLabel, MenuItem, Select, FormControl,FormControlLabel,Switch, Paper, Radio, RadioGroup, Button, Table, TableBody, TableContainer, TableCell,TableHead,TableRow, Drawer } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker, TimePicker, LocalizationProvider } from '@mui/x-date-pickers';
@@ -346,6 +346,22 @@ function ControllerLayer({controlList}){
   );
 }
 
+function ControllerLayer2({controlList}){
+  return(
+    <Drawer
+      className="Controller2"
+      anchor="left"
+      open={true}
+      variant="persistent"
+      sx={{
+        flexShrink: 0,
+        '& .MuiDrawer-paper': { width: 240, boxSizing: 'border-box' },
+      }}
+    >
+      <h1>control</h1>
+    </Drawer>
+  )
+}
 
 /**
  * ResultPopup Layer
@@ -539,4 +555,4 @@ function TimeSeriesPopup({...prop}){
 }
 
 
-export { GeotiffLayer, PlottyGeotiffLayer, VectorArrowsGeotiffLayer,ControllerLayer,BasemapControlLayer, ResultPopup,TimeSeriesPopup};
+export { GeotiffLayer, PlottyGeotiffLayer, VectorArrowsGeotiffLayer,ControllerLayer,BasemapControlLayer, ResultPopup,TimeSeriesPopup, ControllerLayer2};

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import {CssBaseline,Box,Toolbar, Typography,IconButton} from '@mui/material'
 import MuiAppBar from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 import pages from './subpage';
 
@@ -58,13 +58,38 @@ export default function MainPage(){
         <ThemeProvider theme={mdTheme}>
             <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
-                <AppBar className='nav-bar' position="absolute" open={open}>
+                <AppBar className='nav-bar' position="absolute" open={false}>
                 <Toolbar
                     className='Nav-bar'
                     sx={{
                         pr: '5rem', // keep right padding when drawer closed
                     }}
                 >
+                    {/* <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={toggleDrawer}
+                        edge="start"
+                        sx={{
+                            marginRight: '1rem',
+                            ...(open && { display: 'none' }),
+                        }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={toggleDrawer}
+                        edge="start"
+                        sx={{
+                            marginRight: '1rem',
+                            ...(!open && { display: 'none' }),
+                        }}
+                    >
+                        <ArrowBackIosNewIcon />
+                    </IconButton> */}
+
                     <img src="img/logo.png" alt="logo" className="logo"/>
                 </Toolbar>
                 </AppBar>

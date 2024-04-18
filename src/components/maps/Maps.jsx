@@ -7,7 +7,7 @@ import marker from './marker.svg';
 
 import {Icon,divIcon} from 'leaflet';
 
-import { PlottyGeotiffLayer, VectorArrowsGeotiffLayer,ControllerLayer,BasemapControlLayer, ResultPopup,TimeSeriesPopup } from "../../layers/Layers";
+import { PlottyGeotiffLayer, VectorArrowsGeotiffLayer,ControllerLayer,BasemapControlLayer, ResultPopup,TimeSeriesPopup, ControllerLayer2 } from "../../layers/Layers";
 
 import { useState, useRef, useEffect } from "react";
 
@@ -247,7 +247,17 @@ export default function Maps(){
             {/* Vector Layer End */}
             
             {/* Controller Start */}
-            <ControllerLayer controlList={{
+            {/* <ControllerLayer controlList={{
+                'basemap':{'value':mtype,'handler':BasemapHandler},
+                'cscale':{'value':DataSpeedOptions['colorScale'],'handler':CscaleHandler},
+                'data':{'value':DataName,'handler':DataHandler},
+                'isSsc':{'value':isSSC,'handler':SSCHandler},
+                'RLayer':{'value':RasterLayer,'handler':RLayerHandler},
+                'display':{'min':DataSpeedOptions['displayMin'],'max':DataSpeedOptions['displayMax']},
+                'date':{'value':DataDate,'handler':DataDateHandler},
+                'dataType':{'value':DataType,'handler':DataTypeHandler},
+            }}/> */}
+            <ControllerLayer2 controlList={{
                 'basemap':{'value':mtype,'handler':BasemapHandler},
                 'cscale':{'value':DataSpeedOptions['colorScale'],'handler':CscaleHandler},
                 'data':{'value':DataName,'handler':DataHandler},
@@ -297,7 +307,7 @@ export default function Maps(){
             ))}
 
             {/* Result Popup */}
-            {RPopen?<ResultPopup open={RPopen} setClose={RPclose} data={DataName} marker={SelectMarker}/>:null}
+            {/* {RPopen?<ResultPopup open={RPopen} setClose={RPclose} data={DataName} marker={SelectMarker}/>:null} */}
             {/* Time Series Popup */}
             {TSopen?<TimeSeriesPopup open={TSopen} setClose={TSclose} marker={SelectMarker} data={DataName}/>:null}
 
