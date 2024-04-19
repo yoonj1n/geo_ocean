@@ -309,7 +309,7 @@ export default function Maps(){
             {/* Result Popup */}
             {/* {RPopen?<ResultPopup open={RPopen} setClose={RPclose} data={DataName} marker={SelectMarker}/>:null} */}
             {/* Time Series Popup */}
-            {TSopen?<TimeSeriesPopup open={TSopen} setClose={TSclose} marker={SelectMarker} data={DataName}/>:null}
+            {/* {TSopen?<TimeSeriesPopup open={TSopen} setClose={TSclose} marker={SelectMarker} data={DataName}/>:null} */}
 
             {/* Test */}
             {/* <Drawer

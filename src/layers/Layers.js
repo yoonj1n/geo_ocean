@@ -6,11 +6,18 @@ import L from "leaflet";
 import { useMap, TileLayer } from "react-leaflet";
 import { useEffect, useRef, useState } from "react";
 import { Accordion, AccordionSummary, AccordionDetails, Typography, InputLabel, MenuItem, Select, FormControl,FormControlLabel,Switch, Paper, Radio, RadioGroup, Button, Table, TableBody, TableContainer, TableCell,TableHead,TableRow, Drawer } from '@mui/material';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker, TimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 
 function GeotiffLayer({ url, options, Types }) {
@@ -77,7 +84,6 @@ function PlottyGeotiffLayer({ options, ...props }) {
         newimg.src = colorbarDataUrl;
         
         document.getElementsByClassName('Colorbar')[0].appendChild(newimg);
-        // document.getElementsByClassName('under-right')[0].appendChild(newimg);
       }
     }
   },[colorbarDataUrl]);
@@ -198,6 +204,7 @@ function ControllerLayer({controlList}){
         {/* Color Scale bar */}
         <b>표층해류 (m/s)</b>
         <Paper className="Colorbar_ssc">
+                <img id='Colorbarimg_ssc' className='Colorbarimg_ssc' src=""/>
                 <div className='colorbar_num'>
                     {getNumberArray(0.00,2.00).map((data,index)=>(
                         <p key={index}>{data}</p>
@@ -347,7 +354,12 @@ function ControllerLayer({controlList}){
 }
 
 function ControllerLayer2({controlList}){
+  const cList = {...controlList};
+  const unit = cList.data.value === 'SST'?'℃':
+              cList.data.value === 'chl'?'㎍/L':
+              'psu';
   return(
+    <ThemeProvider theme={darkTheme}>
     <Drawer
       className="Controller2"
       anchor="left"
@@ -355,11 +367,156 @@ function ControllerLayer2({controlList}){
       variant="persistent"
       sx={{
         flexShrink: 0,
-        '& .MuiDrawer-paper': { width: 240, boxSizing: 'border-box' },
+        '& .MuiDrawer-paper': { boxSizing: 'border-box' },
       }}
     >
-      <h1>control</h1>
+      {/* Color Scale bar */}
+      <b>표층해류 (m/s)</b>
+        <Paper className="Colorbar_ssc">
+                <div className='colorbar_num'>
+                    {getNumberArray(0.00,2.00).map((data,index)=>(
+                        <p key={index}>{data}</p>
+                    ))}
+                </div>
+        </Paper>
+
+        <b>{cList.data.value} ({unit})</b>
+        <Paper className="Colorbar">
+                <div className='colorbar_num'>
+                    {getNumberArray(cList.display.min,cList.display.max).map((data,index)=>(
+                        <p key={index}>{data}</p>
+                    ))}
+                </div>
+        </Paper>
+
+
+        {/* Date Control */}
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <b className="ControllerHeader">Date</b>
+          <DatePicker
+            className="ControllerD"
+            value={cList.date.value||''}
+            onChange={cList.date.handler}
+          />
+          {
+            cList.dataType.value === 'Hourly'?
+            <TimePicker className="ControllerD" views={['hours']} />:
+            <TimePicker className="ControllerD" disabled views={['hours']} />
+            
+          }
+        </LocalizationProvider>
+
+
+        {/* Data Control */}
+        <FormControl className="ControllerSWrapper" size="small">
+          <b style={{'marginTop':'1rem'}} className="ControllerHeader">Data</b>
+          <Select
+            className="ControllerS"
+            labelId="dataL"
+            id="dataS"
+            value={cList.data.value}
+            onChange={cList.data.handler}
+          >
+            {
+              [
+                {name:'SST',value:'SST'},
+                {name:'SSS',value:'SSS'},
+                {name:'Chl_a',value:'chl'},
+                {name:'10m_Low_Salinity',value:'10m'}
+              ].map(data=>{
+                return(<MenuItem className="ControllerL_M" value={data.value}>{data.name}</MenuItem>)
+              })
+            }
+          </Select>
+        </FormControl>
+
+        {/* Select Daily, Hourly Data for SST Data */}
+        
+        <FormControl className="ControllerSWrapper" size="small">
+          <b style={{'marginBottom':'0rem'}} className="ControllerHeader">Data Type</b>
+          {cList.data.value === 'SST'?
+            <RadioGroup
+              className="ControllerR"
+              aria-label="data_type"
+              name="data_type"
+              value={cList.dataType.value}
+              onChange={cList.dataType.handler}
+            >
+              <FormControlLabel size='small' value="Daily" control={<Radio />} label="Daily" />
+              <FormControlLabel size='small' value="Hourly" control={<Radio />} label="Hourly" />
+            </RadioGroup>:
+            <RadioGroup
+            className="ControllerR"
+            aria-label="data_type"
+            name="data_type"
+            value={''}
+            >
+              <FormControlLabel size='small' value="Daily" control={<Radio />} label="Daily" disabled/>
+              <FormControlLabel size='small' value="Hourly" control={<Radio />} label="Hourly" disabled/>
+            </RadioGroup>}
+        </FormControl>
+
+
+
+        {/* Map Type Control */}
+        <FormControl className="ControllerSWrapper" size="small">
+          <b className="ControllerHeader">Map Style</b>
+          <Select
+            className="ControllerS"
+            labelId="basemapL"
+            id="basemapS"
+            value={cList.basemap.value}
+            onChange={cList.basemap.handler}
+          >
+            <MenuItem className="ControllerL_M" value="openstreet">Openstreet</MenuItem>
+            <MenuItem className="ControllerL_M" value="carto">Carto</MenuItem>
+            <MenuItem className="ControllerL_M" value="shape">ShapeMap</MenuItem>
+          </Select>
+        </FormControl>
+
+
+        {/* Color Scale Control */}
+        {/* <Typography className="ControllerD">
+          ‣ Color Scale
+        </Typography> */}
+        <FormControl className="ControllerSWrapper" size="small">
+          {/* <InputLabel id='cscaleL' className="ControllerL">Color Scale</InputLabel> */}
+          <b className="ControllerHeader">Color Scale</b>
+          <Select
+            className="ControllerS"
+            labelId="cscaleL"
+            id="cscaleS"
+            value={cList.cscale.value}
+            // label="Color Scale"
+            onChange={cList.cscale.handler}
+          >
+            {['viridis', 'inferno', 'turbo', 'rainbow', 'jet', 'hsv', 'hot', 'cool', 'spring', 'summer', 'winter', 'autumn', 'bone', 'copper', 'greys', 'greens',  'bluered', 'rdbu', 'picnic', 'portland', 'blackbody', 'earth', 'electric', 'magma', 'plasma'].map(cs=>{
+              return(<MenuItem className="ControllerL_M" value={cs}>{cs}</MenuItem>)
+            })}
+          </Select>
+        </FormControl>
+
+        {/* OnOff Layer */}
+        <FormControlLabel 
+          control={<Switch 
+                    checked={!!cList.isSsc.value}
+                    onChange={cList.isSsc.handler}
+                    inputProps={{ 'aria-label': 'CLControl' }}
+                  />} 
+         label="표층 해류 표출"
+         key={'CLControl'}
+         />
+        <FormControlLabel
+          control={<Switch 
+                    checked={!!cList.RLayer.value}
+                    onChange={cList.RLayer.handler}
+                    inputProps={{ 'aria-label': 'RLControl' }}
+                  />} 
+         label="데이터 표출"
+         key={'RLControl'}
+         />
     </Drawer>
+  </ThemeProvider>
   )
 }
 
