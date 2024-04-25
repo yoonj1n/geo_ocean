@@ -27,7 +27,7 @@ const timeDimensionOptions ={
 
 export default function Maps(){
     // maptype
-    const [mtype,setMtype] = useState("carto");
+    const [mtype,setMtype] = useState("shape");
 
     // Layer control
     const [RasterLayer, setRasterLayer] = useState(true);
@@ -42,10 +42,13 @@ export default function Maps(){
     // Data Date
     const [DataDate, setDataDate] = useState(dayjs('2020-09-01'));
     // Default tiff file path
-
     const [DataUrl, setDataUrl] = useState(`/api/dataresult/${DataName}/${DataDate.format('YYYYMMDD')}/${DataType}`)
     
     const [SSCDataUrl, setSSCDataUrl] = useState(`/api/dataresult/SSC/${DataDate.format('YYYYMMDD')}/${DataType}`);
+
+    // Controller Open Handler - TODO : link ControllerLayer
+    const [ControllerOpen, setControllerOpen] = useState(true);
+    const ControllerOpenHandler = () => setControllerOpen(!ControllerOpen);
 
     const layerRef = useRef(null);
 
@@ -117,7 +120,6 @@ export default function Maps(){
         tmpDSOptions['colorScale'] = e.target.value;
         setDSOptions(tmpDSOptions);
     }
-    // TODO : Backend link and change url
     const DataHandler = (e)=>{
         setDataName(e.target.value);
         setDataUrl(`/api/dataresult/${e.target.value}/${DataDate.format('YYYYMMDD')}/${DataType}`);
@@ -152,7 +154,6 @@ export default function Maps(){
 
     const DataTypeHandler = (e) => setDataType(e.target.value);
 
-    // TEST : get json files from backend and add to map
     const [jsonFiles, setJsonFiles] = useState(null);
     useEffect(() => {
         fetch("/api/mapList")
@@ -203,20 +204,22 @@ export default function Maps(){
 
     // Map Style
     const mapStyle = ()=>({
-        fillColor: "080808",
+        // fillColor: "#ececec",
+        fillColor: "#262626",
         fillOpacity: 1,
-        color:'black',
-        weight: 1,
+        color:'#504f4f',
+        weight: 0.5,
     });
     
     return(
+        <>
         <MapContainer className="Mapcontainers" 
             center={[36, 126.5]} 
             zoom={6}
             timeDimension
             timeDimensionOptions={timeDimensionOptions}
             // timeDimensionControl
-            style={{backgroundColor:'#252525'}}
+            style={{backgroundColor:'rgb(80,90,102)'}}
         >
             {/* Zoom */}
             <ZoomControl position="topright" />
@@ -245,29 +248,6 @@ export default function Maps(){
                 />:null}
 
             {/* Vector Layer End */}
-            
-            {/* Controller Start */}
-            {/* <ControllerLayer controlList={{
-                'basemap':{'value':mtype,'handler':BasemapHandler},
-                'cscale':{'value':DataSpeedOptions['colorScale'],'handler':CscaleHandler},
-                'data':{'value':DataName,'handler':DataHandler},
-                'isSsc':{'value':isSSC,'handler':SSCHandler},
-                'RLayer':{'value':RasterLayer,'handler':RLayerHandler},
-                'display':{'min':DataSpeedOptions['displayMin'],'max':DataSpeedOptions['displayMax']},
-                'date':{'value':DataDate,'handler':DataDateHandler},
-                'dataType':{'value':DataType,'handler':DataTypeHandler},
-            }}/> */}
-            <ControllerLayer2 controlList={{
-                'basemap':{'value':mtype,'handler':BasemapHandler},
-                'cscale':{'value':DataSpeedOptions['colorScale'],'handler':CscaleHandler},
-                'data':{'value':DataName,'handler':DataHandler},
-                'isSsc':{'value':isSSC,'handler':SSCHandler},
-                'RLayer':{'value':RasterLayer,'handler':RLayerHandler},
-                'display':{'min':DataSpeedOptions['displayMin'],'max':DataSpeedOptions['displayMax']},
-                'date':{'value':DataDate,'handler':DataDateHandler},
-                'dataType':{'value':DataType,'handler':DataTypeHandler},
-            }}/>
-            {/* Controller End */}
 
             {/* Map Layer Start  */}
                 {mtype!=='shape'?<BasemapControlLayer className='MAP' maptype={mtype}/>:null}
@@ -284,7 +264,7 @@ export default function Maps(){
 
 
             {/* Marker */}
-            {Markers.map((data,index)=>(
+            {/* {Markers.map((data,index)=>(
                 <Marker key={index} position={data.position}
                     icon={
                         new divIcon({
@@ -300,11 +280,11 @@ export default function Maps(){
                         },
                     }}
                 >
-                    {/* <Popup>
-                        {data.name}
-                    </Popup> */}
+                    // <Popup>
+                        // {data.name}
+                    // </Popup>
                 </Marker>
-            ))}
+            ))} */}
 
             {/* Result Popup */}
             {/* {RPopen?<ResultPopup open={RPopen} setClose={RPclose} data={DataName} marker={SelectMarker}/>:null} */}
@@ -323,5 +303,19 @@ export default function Maps(){
             </Drawer> */}
 
         </MapContainer>
+        {/* Controller Start */}
+        <ControllerLayer2 controlList={{
+            'basemap':{'value':mtype,'handler':BasemapHandler},
+            'cscale':{'value':DataSpeedOptions['colorScale'],'handler':CscaleHandler},
+            'data':{'value':DataName,'handler':DataHandler},
+            'isSsc':{'value':isSSC,'handler':SSCHandler},
+            'RLayer':{'value':RasterLayer,'handler':RLayerHandler},
+            'display':{'min':DataSpeedOptions['displayMin'],'max':DataSpeedOptions['displayMax']},
+            'date':{'value':DataDate,'handler':DataDateHandler},
+            'dataType':{'value':DataType,'handler':DataTypeHandler},
+            'controller':{'value':ControllerOpen,'handler':ControllerOpenHandler},
+        }}/>
+        {/* Controller End */}
+        </>
     )  
 }

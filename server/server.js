@@ -47,12 +47,12 @@ app.get('/api/result/:data/:where',(req,res)=>{
         'July', 'August', 'September', 'October', 'November', 'December'
       ];
     
-    const dataDirectory = '/Volumes/GSRB02/Geo_Ocean/Data/TIMESERIES/LAST'
+    const dataDirectory = '/Volumes/GSRB02/GNOMS-V/Data/TIMESERIES/LAST'
 
     let rawData;
 
     if(data === 'chl'){
-        rawData = fs.readFileSync('/Volumes/GSRB02/Geo_Ocean/Data/TIMESERIES/LAST/result/chl/ust21_chl_a_skill_score.txt','utf8');
+        rawData = fs.readFileSync('/Volumes/GSRB02/GNOMS-V/Data/TIMESERIES/LAST/result/chl/ust21_chl_a_skill_score.txt','utf8');
     }else{
         rawData = fs.readFileSync(path.join(dataDirectory,'result',data,`${where}_skill_score.txt`),'utf8');
     }
@@ -101,7 +101,7 @@ app.get('/api/dataresult/:data/:date/:inter',(req,res)=>{
     const date = req.params.date
     const interver = req.params.inter
     
-    const dataDirectory = '/Volumes/GSRB02/Geo_Ocean/Data/MODEL/LAST'
+    const dataDirectory = '/Volumes/GSRB02/GNOMS-V/Data/MODEL/LAST'
     
     
     const targetDirectory = data !== 'SST'?path.join(dataDirectory,data):path.join(dataDirectory,data,interver)
@@ -114,24 +114,24 @@ app.get('/api/dataresult/:data/:date/:inter',(req,res)=>{
 })
 
 app.get('/api/SST',(req,res)=>{
-    res.sendFile('/Volumes/GSRB02/Geo_Ocean/Data/MODEL/UNIST/SST/Daily/2021/01/01/tif/20210101_UNIST-IRIS-L4-SSTsubskin-MURTI_Daily_DL_V0.1.tif')
+    res.sendFile('/Volumes/GSRB02/GNOMS-V/Data/MODEL/UNIST/SST/Daily/2021/01/01/tif/20210101_UNIST-IRIS-L4-SSTsubskin-MURTI_Daily_DL_V0.1.tif')
 })
 
 app.get('/api/SSS',(req,res)=>{
-    res.sendFile('/Volumes/GSRB02/Geo_Ocean/Data/MODEL/UNIST/SSS/tif/20201228_DL_Reconstructed_SSS.tif')
+    res.sendFile('/Volumes/GSRB02/GNOMS-V/Data/MODEL/UNIST/SSS/tif/20201228_DL_Reconstructed_SSS.tif')
 })
 
 app.get('/api/chl',(req,res)=>{
-    res.sendFile('/Volumes/GSRB02/Geo_Ocean/Data/MODEL/UST21/2021/01/tif/test.tif')
+    res.sendFile('/Volumes/GSRB02/GNOMS-V/Data/MODEL/UST21/2021/01/tif/test.tif')
 })
 
 app.get('/api/10m',(req,res)=>{
-    res.sendFile('/Volumes/GSRB02/Geo_Ocean/Data/MODEL/PNU/10msalinity/tif/20150502_10m salinity_cnn_PNU.tif')
+    res.sendFile('/Volumes/GSRB02/GNOMS-V/Data/MODEL/PNU/10msalinity/tif/20150502_10m salinity_cnn_PNU.tif')
 })
 
 
 app.get('/api/ssctest',(req,res)=>{
-    res.sendFile('/Volumes/GSRB02/Geo_Ocean/Data/MODEL/PNU/ssc/tif/20180108_sf_current_2018.tif')
+    res.sendFile('/Volumes/GSRB02/GNOMS-V/Data/MODEL/PNU/ssc/tif/20180108_sf_current_2018.tif')
 })
 
 app.get('/',(req,res)=>{
